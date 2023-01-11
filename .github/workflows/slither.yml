@@ -36,19 +36,23 @@ jobs:
           sudo wget -O /usr/bin/solc https://github.com/ethereum/solidity/releases/download/v0.8.17/solc-static-linux
           sudo chmod +x /usr/bin/solc
       - name: Summary of static ananlysis
+        env:
+          MNEMONIC: ${{secrets.MNEMONIC}}
+          INFURA_API_KEY: ${{secrets.INFURA_API_KEY}}
+          ETHERSCAN_API_KEY: ${{secrets.ETHERSCAN_API_KEY}}
         run: |
           echo "Running slither"
           slither . --print human-summary
-      - name: Contract summary of static ananlysis
-        run: |
-          echo "Running slither"
-          slither . --print contract-summary
-      - name: Function summary
-        run: |
-          slither . --print function-summary
-      - name: Data dependency
-        run: |
-          slither . --print data-dependency
-      - name: Inheritance
-        run: |
-          slither . --print inheritance
+      # - name: Contract summary of static ananlysis
+      #   run: |
+      #     echo "Running slither"
+      #     slither . --print contract-summary
+      # - name: Function summary
+      #   run: |
+      #     slither . --print function-summary
+      # - name: Data dependency
+      #   run: |
+      #     slither . --print data-dependency
+      # - name: Inheritance
+      #   run: |
+      #     slither . --print inheritance
